@@ -22,7 +22,7 @@ class LuckyNumber():
         
         resp_year = requests.get(f"http://numbersapi.com/{year}/year")
         
-        data = {"fact": resp_year.text, "year": str(year)}
+        data = {"fact": resp_year.text, "year": year}
         
         return data
 
@@ -42,7 +42,9 @@ class LuckyNumber():
                 data["color"] = ["Invalid value, must be one of: red, green, orange, blue."]
         
         if json_data["year"]:
-            if json_data["year"] not in range(1900, 2001):
-                data["year"] = ["Invalid value, year must be 1900 to 2000."]
-        
+            try:
+                if int(json_data["year"]) not in range(1900, 2001):
+                    data["year"] = ["Invalid value, year must be 1900 to 2000."]
+            except:
+                data["year"] = ["Invalid value, must be a number."]
         return data

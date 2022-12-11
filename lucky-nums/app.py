@@ -18,7 +18,8 @@ def generate_info():
     result = LuckyNumber.validate_json_data(json_data)
     
     if result:
-        return jsonify(result)
+        errors = {"errors": result}
+        return jsonify(errors)
     
     else:
         
